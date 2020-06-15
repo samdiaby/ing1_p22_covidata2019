@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="63dp"
+        android:layout_marginTop="44dp"
+        android:text="@string/Title"
+        android:textColor="#101381"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="339dp"
+        android:layout_height="70dp"
+        android:fontFamily="serif"
+        android:text="@string/description"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Title"
+        app:layout_constraintVertical_bias="0.115" />
+
+    <TextView
+        android:id="@+id/appby"
+        android:layout_width="89dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/appby"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
+
+    <TextView
+        android:id="@+id/XF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/byXF"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/appby"
+        app:layout_constraintTop_toTopOf="@+id/appby" />
+
+    <TextView
+        android:id="@+id/GKC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="@string/byGKC"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/appby"
+        app:layout_constraintTop_toBottomOf="@+id/SD" />
+
+    <TextView
+        android:id="@+id/SD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/bySD"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/appby"
+        app:layout_constraintTop_toBottomOf="@+id/XF" />
+
+    <Button
+        android:id="@+id/Graph"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/GraphBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/data" />
+
+    <Button
+        android:id="@+id/data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/DataBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/GKC" />
+
+    <Button
+        android:id="@+id/Mystery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/MysteryBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/data"
+        app:layout_constraintTop_toTopOf="@+id/data" />
+
+    <TextView
+        android:id="@+id/MadeByEpita"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="72dp"
+        android:text="@string/MadebyEpita"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Mystery"
+        app:layout_constraintVertical_bias="0.367" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="129dp"
+        android:layout_height="87dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MadeByEpita"
+        app:srcCompat="@drawable/EPITA_LOGO_INGENIEUR_RVB" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
