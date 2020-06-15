@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Covidata2019</string>
+
+    <!-- Main activity -->
     <string name="Title">Covidata2019</string>
     <string name="description">Avec Covidata2019, soyez les premiers informez sur l\'état de l\'épidémie</string>
     <string name="appby">App by:</string>
@@ -12,13 +14,15 @@
     <string name="MysteryBtn">\?</string>
     <string name="MadebyEpita">Made by Epita</string>
 
-
+    <!-- Data activity -->
     <string name="Totals">Totals</string>
     <string name="World">World</string>
     <string name="Confirmed">Confirmed:</string>
     <string name="Deaths">Deaths:</string>
     <string name="Recovered">Recovered:</string>
-
     <string name="ByContry">By country</string>
+
+    <!-- Country Data activity -->
+    <string name="activity_country_data_country_text">Country</string>
 
 </resources>
