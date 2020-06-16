@@ -25,4 +25,9 @@
     <!-- Country Data activity -->
     <string name="activity_country_data_country_text">Country</string>
 
+    <!-- Country Data activity -->
+    <string name="activity_graph_data_confirmed_text">Confirmed</string>
+    <string name="activity_graph_data_deaths_text">Deaths</string>
+    <string name="activity_graph_data_recovered_text">Recovered</string>
+
 </resources>

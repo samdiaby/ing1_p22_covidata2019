@@ -35,7 +35,7 @@ class Data : AppCompatActivity() {
             val message = clickedCountry.name
             intent.putExtra("countryName", message)
 
-            startActivity(intent);
+            startActivity(intent)
         }
 
         // set the adapter in order to set the recycler view (in activity_data)
