@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <CalendarView
-        android:id="@+id/calendarView"
+        android:id="@+id/activity_country_data_calendar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +22,7 @@
         android:layout_marginTop="10dp"
         android:textSize="35sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView"
+        app:layout_constraintTop_toBottomOf="@+id/activity_country_data_calendar"
         tools:text="Country" />
 
     <TextView
@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:text="TextView"
+        android:text="@string/activity_graph_data_confirmed_count"
         app:layout_constraintBottom_toBottomOf="@+id/activity_country_data_confirmed_text"
         app:layout_constraintStart_toEndOf="@+id/activity_country_data_confirmed_text"
         app:layout_constraintTop_toTopOf="@+id/activity_country_data_confirmed_text" />
@@ -73,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:text="TextView"
+        android:text="@string/activity_graph_data_deaths_count"
         app:layout_constraintBottom_toBottomOf="@+id/activity_country_data_deaths_text"
         app:layout_constraintStart_toEndOf="@+id/activity_country_data_deaths_text"
         app:layout_constraintTop_toTopOf="@+id/activity_country_data_deaths_text" />
@@ -83,7 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:text="TextView"
+        android:text="@string/activity_graph_data_recovered_count"
         app:layout_constraintBottom_toBottomOf="@+id/activity_country_data_recovered_text"
         app:layout_constraintStart_toEndOf="@+id/activity_country_data_recovered_text"
         app:layout_constraintTop_toTopOf="@+id/activity_country_data_recovered_text" />

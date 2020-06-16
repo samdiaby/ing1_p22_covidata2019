@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="10dp"
-        android:text="TextView"
+        android:text="@string/activity_data_Recovered_count"
         app:layout_constraintStart_toEndOf="@+id/Recovered"
         app:layout_constraintTop_toTopOf="@+id/Recovered" />
 
@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="10dp"
-        android:text="TextView"
+        android:text="@string/activity_data_deaths_count"
         app:layout_constraintStart_toEndOf="@+id/Deaths"
         app:layout_constraintTop_toTopOf="@+id/Deaths" />
 
@@ -97,7 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="TextView"
+        android:text="@string/activity_data_confirmed_count"
         app:layout_constraintStart_toEndOf="@+id/Confirmed"
         app:layout_constraintTop_toTopOf="@+id/Confirmed" />
 

@@ -21,6 +21,10 @@
     <string name="Deaths">Deaths:</string>
     <string name="Recovered">Recovered:</string>
     <string name="ByContry">By country</string>
+    <string name="activity_data_confirmed_count">0</string>
+    <string name="activity_data_deaths_count">0</string>
+    <string name="activity_data_Recovered_count">0</string>
+
 
     <!-- Country Data activity -->
     <string name="activity_country_data_country_text">Country</string>
@@ -29,5 +33,9 @@
     <string name="activity_graph_data_confirmed_text">Confirmed</string>
     <string name="activity_graph_data_deaths_text">Deaths</string>
     <string name="activity_graph_data_recovered_text">Recovered</string>
+
+    <string name="activity_graph_data_confirmed_count">No data yet</string>
+    <string name="activity_graph_data_deaths_count">No data yet</string>
+    <string name="activity_graph_data_recovered_count">No data yet</string>
 
 </resources>

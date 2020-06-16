@@ -7,6 +7,11 @@ import retrofit2.http.Query;
 
 interface WebServiceInterface {
     @GET("countries")
-    fun listToDos(@Query("Country") Country: String): Call<List<Countries>>
+    fun GetCountries(): Call<List<Countries>>
 
+    @GET("countries")
+    fun GetWorldData(@Query("Country") Country : String): Call<WorldData>
+
+    @GET("all")
+    fun GetDatasFrom(@Query("Country") Country : String) : Call<List<AllDatas>>
 }

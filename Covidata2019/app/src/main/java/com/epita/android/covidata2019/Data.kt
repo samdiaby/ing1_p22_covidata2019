@@ -36,8 +36,6 @@ class Data : AppCompatActivity() {
             .build()
         // Use the client to create a service:
         // an object implementing the interface to the WebService
-        var names = arrayListOf<String>()
-        var data = arrayListOf<Countries>()
 
         val service: WebServiceInterface = retrofit.create(WebServiceInterface::class.java)
         val wsCallback: Callback<List<Countries>> = object : Callback<List<Countries>> {
@@ -52,15 +50,9 @@ class Data : AppCompatActivity() {
                     // We got our data !
                     val res = response.body()!!
                     if (res != null) {
-                        for (i in res.indices)
-                        {
-                            names.add(res.get(i).Country)
-                        }
-
-                        Log.d("TAG", "WebService success : " + data.size)
-                        Log.d("TAG", "WebService names : " + names)
-
+                        Log.d("TAG", "WebService success : " + res.size)
                     }
+
                     val onClickListener = View.OnClickListener { clickedRowView ->
                         val clickedCountry: Countries = res[clickedRowView.tag as Int]
                         Toast.makeText(this@Data, "Clicked : " + clickedCountry.Country,
@@ -78,7 +70,7 @@ class Data : AppCompatActivity() {
                         onClickListener)
 
                     // change this for webservice uses ?
-                    //activity_data_list_countries.setHasFixedSize(true)
+                    activity_data_list_countries.setHasFixedSize(true)
 
                     //recycler view appearance
                     activity_data_list_countries.layoutManager = LinearLayoutManager(this@Data)
@@ -86,42 +78,33 @@ class Data : AppCompatActivity() {
                 }
             }
         }
-        service.listToDos("France").enqueue(wsCallback)
 
+        service.GetCountries().enqueue(wsCallback)
 
-        /*val data : MutableList<Countries> = arrayListOf()
+        val wsCallbackGlobal: Callback<WorldData> = object : Callback<WorldData> {
+            override fun onFailure(call: Call<WorldData>, t: Throwable) {
+                // Code here what happens if calling the WebService fails
+                Log.w("TAG", "WebService call failed")
+            }
+            override fun onResponse(call: Call<WorldData>, response:
+            Response<WorldData>
+            ) {
+                if (response.code() == 200) {
+                    // We got our data !
+                    val res = response.body()!!
+                    if (res != null) {
+                        Log.d("TAG", "WebService success : " + res)
+                    }
 
-        // changer pour récupérer les données du web service
-        data.add(Countries("France"))
-        data.add(Countries("United States"))
-        data.add(Countries("Japan"))
-        data.add(Countries("China"))
-        data.add(Countries("Belgium"))
-        data.add(Countries("Canada"))*/
-
-        // create a listener in order to access to the details for each country
-       /* val onClickListener = View.OnClickListener { clickedRowView ->
-            val clickedCountry: Countries = data[clickedRowView.tag as Int]
-            Toast.makeText(this, "Clicked : " + clickedCountry.Country,
-                                                                        Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, CountryData::class.java)
-
-            val message = clickedCountry.Country
-            intent.putExtra("countryName", message)
-
-            startActivity(intent)
+                    if (res.Country.equals("Global")) {
+                        Confirmedcpt.text = res.TotalConfired.toString()
+                        Recoveredcpt.text = res.TotalRecovered.toString()
+                        Deathcpt.text = res.TotalDeaths.toString()
+                    }
+                }
+            }
         }
-
-        // set the adapter in order to set the recycler view (in activity_data)
-        activity_data_list_countries.adapter = CountriesAdapter(this, data,
-                                                                                    onClickListener)
-
-        // change this for webservice uses ?
-        //activity_data_list_countries.setHasFixedSize(true)
-
-        //recycler view appearance
-        activity_data_list_countries.layoutManager = LinearLayoutManager(this)*/
-
+        service.GetWorldData("Global").enqueue(wsCallbackGlobal)
     }
 
 }
