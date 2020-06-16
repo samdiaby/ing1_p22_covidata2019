@@ -37,6 +37,6 @@ class CountriesAdapter(val context : Activity, val data : List<Countries>, val o
         // Set the item to put in the recycler view
         holder.countryName.text = country.Country
 
-        holder.itemView.country.tag = position
+        holder.itemView.country.tag = country
     }
 }

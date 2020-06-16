@@ -54,14 +54,15 @@ class Data : AppCompatActivity() {
                     }
 
                     val onClickListener = View.OnClickListener { clickedRowView ->
-                        val clickedCountry: Countries = res[clickedRowView.tag as Int]
+                        val clickedCountry: Countries = clickedRowView.tag as Countries
                         Toast.makeText(this@Data, "Clicked : " + clickedCountry.Country,
                             Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@Data, CountryData::class.java)
 
                         val message = clickedCountry.Country
                         intent.putExtra("countryName", message)
-
+                        val message_slug = clickedCountry.Slug
+                        intent.putExtra("SlugName", message_slug)
                         startActivity(intent)
                     }
 
@@ -81,30 +82,28 @@ class Data : AppCompatActivity() {
 
         service.GetCountries().enqueue(wsCallback)
 
-        val wsCallbackGlobal: Callback<WorldData> = object : Callback<WorldData> {
-            override fun onFailure(call: Call<WorldData>, t: Throwable) {
+        val wsCallbackGlobal: Callback<gdata> = object : Callback<gdata> {
+            override fun onFailure(call: Call<gdata>, t: Throwable) {
                 // Code here what happens if calling the WebService fails
                 Log.w("TAG", "WebService call failed")
             }
-            override fun onResponse(call: Call<WorldData>, response:
-            Response<WorldData>
+            override fun onResponse(call: Call<gdata>, response:
+            Response<gdata>
             ) {
                 if (response.code() == 200) {
                     // We got our data !
                     val res = response.body()!!
-                    if (res != null) {
-                        Log.d("TAG", "WebService success : " + res)
+                    if (res.Global != null) {
+                        Log.d("TAG", "WebService wordl success : " + res)
+                        Confirmedcpt.text = res.Global.TotalConfirmed.toString()
+                        Recoveredcpt.text = res.Global.TotalRecovered.toString()
+                        Deathcpt.text = res.Global.TotalDeaths.toString()
                     }
 
-                    if (res.Country.equals("Global")) {
-                        Confirmedcpt.text = res.TotalConfired.toString()
-                        Recoveredcpt.text = res.TotalRecovered.toString()
-                        Deathcpt.text = res.TotalDeaths.toString()
-                    }
                 }
             }
         }
-        service.GetWorldData("Global").enqueue(wsCallbackGlobal)
+        service.GetWorldData().enqueue(wsCallbackGlobal)
     }
 
 }

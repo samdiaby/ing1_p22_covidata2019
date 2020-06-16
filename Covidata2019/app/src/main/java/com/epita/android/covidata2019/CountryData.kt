@@ -30,6 +30,7 @@ class CountryData : AppCompatActivity(){
         // get the country name from the pressed button
         val originIntent = intent
         val countryName = originIntent.getStringExtra("countryName")
+        val SlugName = originIntent.getStringExtra("SlugName")
         // set the name of the country selected from the list
         activity_country_data_country_text.text = countryName
 
@@ -82,14 +83,26 @@ class CountryData : AppCompatActivity(){
                         }
 
                         Log.d("TAG", "Date : " + calendarDate)
+                        Log.d("TAG", "res size : " + res.size)
                         var isInside : Boolean = false
 
                         for (data in res) {
-                            if (data.Date.substring(0, 10).equals(calendarDate)) {
+                            Log.d("TAG", "Status : " + data.Status)
+                            if (data.Date.substring(0, 10).equals(calendarDate) && data.Status.equals("confirmed")) {
                                 Log.d("TAG", "Date : " + data.Date)
-                                activity_country_data_confirmed_count.text = data.Confirmed.toString()
-                                activity_country_data_deaths_count.text = data.Deaths.toString()
-                                activity_country_data_recovered_count.text = data.Recovered.toString()
+                                activity_country_data_confirmed_count.text = data.Cases.toString()
+                                isInside = true
+                                break;
+                            }
+                            else if (data.Date.substring(0, 10).equals(calendarDate) && data.Status.equals("deaths")) {
+                                Log.d("TAG", "Date : " + data.Date)
+                                activity_country_data_deaths_count.text = data.Cases.toString()
+                                isInside = true
+                                break;
+                            }
+                            else if (data.Date.substring(0, 10).equals(calendarDate) && data.Status.equals("recovered")) {
+                                Log.d("TAG", "Date : " + data.Date)
+                                activity_country_data_recovered_count.text = data.Cases.toString()
                                 isInside = true
                                 break;
                             }
@@ -106,6 +119,32 @@ class CountryData : AppCompatActivity(){
                 }
             }
         }
-        service.GetDatasFrom(countryName).enqueue(wsCallback)
+        val cal: Calendar = Calendar.getInstance()
+        val year : String = cal.get(Calendar.YEAR).toString()
+        val month : Int = cal.get(Calendar.MONTH)
+        val day : Int = cal.get(Calendar.DAY_OF_MONTH)
+        var calendarDate : String = "" + year + "-"
+
+        if (month + 1 < 10) {
+            calendarDate += "0" + (month + 1)
+        } else {
+            calendarDate += (month + 1)
+        }
+
+        if (day < 10) {
+            calendarDate += "-0" + day
+        } else {
+            calendarDate += "-" + day
+        }
+        calendarDate += "T00:00:00Z";
+        Log.w("TAG", "DateC" + calendarDate)
+        Log.w("TAG", "SlugName" + SlugName)
+
+        service.GetDatasFrom(countryName,"confirmed","2020-03-01T00:00:00Z",
+            calendarDate).enqueue(wsCallback)
+        /*service.GetDatasFrom(SlugName,"deaths","2020-03-01T00:00:00Z",
+            "2020-04-01T00:00:00Z").enqueue(wsCallback)
+        service.GetDatasFrom(SlugName,"recovered","2020-03-01T00:00:00Z",
+            "2020-04-01T00:00:00Z").enqueue(wsCallback)*/
     }
 }
