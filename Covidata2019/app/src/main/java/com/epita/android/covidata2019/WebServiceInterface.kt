@@ -13,9 +13,18 @@ interface WebServiceInterface {
     @GET("summary")
     fun GetWorldData(): Call<gdata>
 
-    @GET("country/{ctry}/status/{st}")
-    fun GetDatasFrom(@Path("ctry") country : String,
-                     @Path("st") status : String,
+    @GET("country/{ctry}/status/confirmed")
+    fun GetDatasFromConfs(@Path("ctry") cntry : String,
                      @Query("from") from : String,
                     @Query("to") to : String) : Call<List<AllDatas>>
+
+    @GET("country/{ctry}/status/deaths")
+    fun GetDatasFromDeaths(@Path("ctry") cntry : String,
+                          @Query("from") from : String,
+                          @Query("to") to : String) : Call<List<AllDatas>>
+
+    @GET("country/{ctry}/status/recovered")
+    fun GetDatasFromRecov(@Path("ctry") cntry : String,
+                           @Query("from") from : String,
+                           @Query("to") to : String) : Call<List<AllDatas>>
 }
