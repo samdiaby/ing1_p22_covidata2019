@@ -18,4 +18,19 @@ interface WebServiceInterface {
                      @Path("st") status : String,
                      @Query("from") from : String,
                     @Query("to") to : String) : Call<List<AllDatas>>
+
+    @GET("country/{ctry}/status/confirmed")
+    fun getGraphDatasConf(@Path("ctry") cntry : String,
+                     @Query("from") from : String,
+                     @Query("to") to : String) : Call<List<GraphInfo>>
+
+    @GET("country/{ctry}/status/deaths")
+    fun getGraphDatasDeaths(@Path("ctry") cntry : String,
+                      @Query("from") from : String,
+                      @Query("to") to : String) : Call<List<GraphInfo>>
+
+    @GET("country/{ctry}/status/recovered")
+    fun getGraphDatasRecov(@Path("ctry") cntry : String,
+                      @Query("from") from : String,
+                      @Query("to") to : String) : Call<List<GraphInfo>>
 }

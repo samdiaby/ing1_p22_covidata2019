@@ -24,6 +24,34 @@ class Graph : AppCompatActivity() {
 
         val service: WebServiceInterface = RetrofitInstance().getRetrofitInstance()
             .create(WebServiceInterface::class.java)
+        var countryName : String = "France"
+
+        
+        // handle graphical datas
+        val infosCallback: Callback<List<GraphInfo>> = object : Callback<List<GraphInfo>> {
+            override fun onFailure(call: Call<List<GraphInfo>>, t: Throwable) {
+                // Code here what happens if calling the WebService fails
+                Log.w("TAG", "WebService call failed")
+                Log.w("TAG", "WebService call failed : ")
+
+            }
+            override fun onResponse(call: Call<List<GraphInfo>>, response:
+            Response<List<GraphInfo>>
+            ) {
+                if (response.code() == 200) {
+                    // We got our data !
+                    val res = response.body()!!
+                    if (res != null) {
+
+                        Log.d("TAG", "WebService success : " + res.size)
+                    }
+
+                    activity_graph_data_info_list.adapter = GraphInfoAdapter(this@Graph, res)
+                    activity_graph_data_info_list.setHasFixedSize(true)
+                    activity_graph_data_info_list.layoutManager = LinearLayoutManager(this@Graph)
+                }
+            }
+        }
 
         val wsCallback: Callback<List<Countries>> = object : Callback<List<Countries>> {
             override fun onFailure(call: Call<List<Countries>>, t: Throwable) {
@@ -42,13 +70,14 @@ class Graph : AppCompatActivity() {
                     }
 
                     val onClickListener = View.OnClickListener { clickedRowView ->
-                        val clickedCountry: Countries = res[clickedRowView.tag as Int]
-                        Toast.makeText(this@Graph, "Clicked : " + clickedCountry.Country,
-                            Toast.LENGTH_SHORT).show()
+                        val clickedCountry: Countries = clickedRowView.tag as Countries
+                        countryName = clickedCountry.Slug
+                        service.getGraphDatasConf(countryName,
+                            "2020-03-01T00:00:00Z", "2020-06-15T00:00:00Z").enqueue(infosCallback)
                     }
 
                     // set the adapter in order to set the recycler view (in activity_data)
-                    activity_graph_data_country_list.adapter = CountriesAdapter(this@Graph, res,
+                    activity_graph_data_country_list.adapter = CountriesAdapterGraph(this@Graph, res,
                         onClickListener)
 
                     // change this for webservice uses ?
@@ -64,10 +93,20 @@ class Graph : AppCompatActivity() {
 
         service.GetCountries().enqueue(wsCallback)
 
-        val infos : MutableList<GraphInfo> = arrayListOf()
+        Log.d("TAG", "slug name : " + countryName)
+        activity_graph_data_confirmed_btn.setOnClickListener() {
+            service.getGraphDatasConf(countryName,
+                "2020-03-01T00:00:00Z", "2020-06-15T00:00:00Z").enqueue(infosCallback)
+        }
 
-        activity_graph_data_info_list.adapter = GraphInfoAdapter(this, infos)
-        activity_graph_data_info_list.setHasFixedSize(true)
-        activity_graph_data_info_list.layoutManager = LinearLayoutManager(this)
+        activity_graph_data_deaths_btn.setOnClickListener {
+            service.getGraphDatasDeaths(countryName,
+                "2020-03-01T00:00:00Z", "2020-06-15T00:00:00Z").enqueue(infosCallback)
+        }
+
+        activity_graph_data_recovered_btn.setOnClickListener {
+            service.getGraphDatasRecov(countryName,
+                "2020-03-01T00:00:00Z", "2020-06-15T00:00:00Z").enqueue(infosCallback)
+        }
     }
 }

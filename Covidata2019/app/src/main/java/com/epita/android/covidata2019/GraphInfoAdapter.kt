@@ -31,8 +31,27 @@ class GraphInfoAdapter(val context : Activity, val data : List<GraphInfo>)
     override fun onBindViewHolder(holder: viewholder, position: Int) {
         val infos : GraphInfo = data[position]
 
+        var monthText : String = "?"
+
         // Set the item to put in the recycler view
-        holder.date.text = infos.date
-        holder.stats.progress = infos.stats
+        when(infos.Date.substring(5, 7).toInt()) {
+            1 -> monthText = "January"
+            2 -> monthText = "February"
+            3 -> monthText = "March"
+            4 -> monthText = "April"
+            5 -> monthText = "May"
+            6 -> monthText = "June"
+            7 -> monthText = "July"
+            8 -> monthText = "August"
+            9 -> monthText = "September"
+            10 -> monthText = "October"
+            11 -> monthText = "November"
+            12 -> monthText = "December"
+
+            else -> println("Number too high")
+        }
+
+        holder.date.text = monthText + " " + infos.Date.substring(8, 10)
+        holder.stats.progress = infos.Cases
     }
 }
