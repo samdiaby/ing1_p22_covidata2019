@@ -22,20 +22,9 @@ class Graph : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_graph_data)
 
-        // The base URL where the WebService is located
-        val baseURL = "https://api.covid19api.com/"
-        // Use GSON library to create our JSON parser
-        val jsonConverter = GsonConverterFactory.create(GsonBuilder().create())
-        // Create a Retrofit client object targeting the provided URL
-        // and add a JSON converter (because we are expecting json responses)
-        val retrofit = Retrofit.Builder()
-            .baseUrl(baseURL)
-            .addConverterFactory(jsonConverter)
-            .build()
-        // Use the client to create a service:
-        // an object implementing the interface to the WebService
+        val service: WebServiceInterface = RetrofitInstance().getRetrofitInstance()
+            .create(WebServiceInterface::class.java)
 
-        val service: WebServiceInterface = retrofit.create(WebServiceInterface::class.java)
         val wsCallback: Callback<List<Countries>> = object : Callback<List<Countries>> {
             override fun onFailure(call: Call<List<Countries>>, t: Throwable) {
                 // Code here what happens if calling the WebService fails
@@ -76,18 +65,6 @@ class Graph : AppCompatActivity() {
         service.GetCountries().enqueue(wsCallback)
 
         val infos : MutableList<GraphInfo> = arrayListOf()
-
-        // changer pour récupérer les données du web service
-        infos.add(GraphInfo("April 5", 50))
-        infos.add(GraphInfo("April 6", 25))
-        infos.add(GraphInfo("April 7", 10))
-        infos.add(GraphInfo("April 8", 30))
-        infos.add(GraphInfo("April 9", 40))
-        infos.add(GraphInfo("April 10", 60))
-        infos.add(GraphInfo("April 11", 75))
-        infos.add(GraphInfo("April 12", 20))
-        infos.add(GraphInfo("december 13", 115))
-
 
         activity_graph_data_info_list.adapter = GraphInfoAdapter(this, infos)
         activity_graph_data_info_list.setHasFixedSize(true)

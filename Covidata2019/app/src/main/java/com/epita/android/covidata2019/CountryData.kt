@@ -34,17 +34,10 @@ class CountryData : AppCompatActivity(){
         // set the name of the country selected from the list
         activity_country_data_country_text.text = countryName
 
-        // The base URL where the WebService is located
-        val baseURL = "https://api.covid19api.com/"
-        // Use GSON library to create our JSON parser
-        val jsonConverter = GsonConverterFactory.create(GsonBuilder().create())
-        // Create a Retrofit client object targeting the provided URL
-        // and add a JSON converter (because we are expecting json responses)
-        val retrofit = Retrofit.Builder()
-            .baseUrl(baseURL)
-            .addConverterFactory(jsonConverter)
-            .build()
         // Use the client to create a service:
+        val service: WebServiceInterface = RetrofitInstance().getRetrofitInstance()
+                                                            .create(WebServiceInterface::class.java)
+
         // an object implementing the interface to the WebService
 
         val cal: Calendar = Calendar.getInstance()
@@ -69,10 +62,9 @@ class CountryData : AppCompatActivity(){
         Log.w("TAG", "DateC" + calendarDate)
         Log.w("TAG", "SlugName" + SlugName)
 
-        val service: WebServiceInterface = retrofit.create(WebServiceInterface::class.java)
         activity_country_data_calendar?.setOnDateChangeListener {
                 view, year, month, dayOfMonth ->
-            val confCallback: Callback<List<AllDatas>> = object : Callback<List<AllDatas>> {
+        val calCallback: Callback<List<AllDatas>> = object : Callback<List<AllDatas>> {
             override fun onFailure(call: Call<List<AllDatas>>, t: Throwable) {
                 // Code here what happens if calling the WebService fails
                 Log.w("TAG", "WebService call failed")
@@ -86,8 +78,6 @@ class CountryData : AppCompatActivity(){
                     if (res != null) {
                         Log.d("TAG", "WebService success : " + res.size)
                     }
-
-
                         val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
                         Toast.makeText(this@CountryData, msg, Toast.LENGTH_SHORT).show()
 
@@ -105,8 +95,6 @@ class CountryData : AppCompatActivity(){
                             actualDate += "-" + dayOfMonth
                         }
 
-                        Log.d("TAG", "Date : " + actualDate)
-                        Log.d("TAG", "res size : " + res.size)
                         var isInside : Boolean = false
 
                         for (data in res) {
@@ -117,114 +105,13 @@ class CountryData : AppCompatActivity(){
                                 activity_country_data_confirmed_count.text = data.Cases.toString()
                                 isInside = true
                                 break;
-                            }
-                        }
-
-                        if (!isInside) {
-                            activity_country_data_confirmed_count.text = "No data yet"
-                        }
-                    }
-
-            }
-        }
-
-        var deathsCallback: Callback<List<AllDatas>> = object : Callback<List<AllDatas>> {
-            override fun onFailure(call: Call<List<AllDatas>>, t: Throwable) {
-                // Code here what happens if calling the WebService fails
-                Log.w("TAG", "WebService call failed")
-            }
-            override fun onResponse(call: Call<List<AllDatas>>, response:
-            Response<List<AllDatas>>
-            ) {
-                if (response.code() == 200) {
-                    // We got our data !
-                    val res = response.body()!!
-                    if (res != null) {
-                        Log.d("TAG", "WebService success : " + res.size)
-                    }
-
-
-                        val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
-                        Toast.makeText(this@CountryData, msg, Toast.LENGTH_SHORT).show()
-
-                        var actualDate : String = "" + year + "-"
-
-                        if (month + 1 < 10) {
-                            actualDate += "0" + (month + 1)
-                        } else {
-                            actualDate += (month + 1)
-                        }
-
-                        if (dayOfMonth < 10) {
-                            actualDate += "-0" + dayOfMonth
-                        } else {
-                            actualDate += "-" + dayOfMonth
-                        }
-
-                        Log.d("TAG", "Date : " + actualDate)
-                        Log.d("TAG", "res size : " + res.size)
-                        var isInside : Boolean = false
-
-                        for (data in res) {
-                            Log.d("TAG", "Status : " + data.Status)
-                            if (data.Date.substring(0, 10).equals(actualDate)
+                            } else if (data.Date.substring(0, 10).equals(actualDate)
                                 && data.Status.equals("deaths")) {
                                 Log.d("TAG", "Date : " + data.Date)
                                 activity_country_data_deaths_count.text = data.Cases.toString()
                                 isInside = true
                                 break;
-                            }
-                        }
-
-                        if (!isInside) {
-                            activity_country_data_deaths_count.text = "No data yet"
-                        }
-
-                    }
-
-
-            }
-        }
-
-
-        var recovCallback: Callback<List<AllDatas>> = object : Callback<List<AllDatas>> {
-            override fun onFailure(call: Call<List<AllDatas>>, t: Throwable) {
-                // Code here what happens if calling the WebService fails
-                Log.w("TAG", "WebService call failed")
-            }
-            override fun onResponse(call: Call<List<AllDatas>>, response:
-            Response<List<AllDatas>>
-            ) {
-                if (response.code() == 200) {
-                    // We got our data !
-                    val res = response.body()!!
-                    if (res != null) {
-                        Log.d("TAG", "WebService success : " + res.size)
-                    }
-                        val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
-                        Toast.makeText(this@CountryData, msg, Toast.LENGTH_SHORT).show()
-
-                        var actualDate : String = "" + year + "-"
-
-                        if (month + 1 < 10) {
-                            actualDate += "0" + (month + 1)
-                        } else {
-                            actualDate += (month + 1)
-                        }
-
-                        if (dayOfMonth < 10) {
-                            actualDate += "-0" + dayOfMonth
-                        } else {
-                            actualDate += "-" + dayOfMonth
-                        }
-
-                        Log.d("TAG", "Date : " + actualDate)
-                        Log.d("TAG", "res size : " + res.size)
-                        var isInside : Boolean = false
-
-                        for (data in res) {
-                            Log.d("TAG", "Status : " + data.Status)
-                            if (data.Date.substring(0, 10).equals(actualDate)
+                            } else if (data.Date.substring(0, 10).equals(actualDate)
                                 && data.Status.equals("recovered")) {
                                 Log.d("TAG", "Date : " + data.Date)
                                 activity_country_data_recovered_count.text = data.Cases.toString()
@@ -234,19 +121,22 @@ class CountryData : AppCompatActivity(){
                         }
 
                         if (!isInside) {
+                            activity_country_data_confirmed_count.text = "No data yet"
+                            activity_country_data_deaths_count.text = "No data yet"
                             activity_country_data_recovered_count.text = "No data yet"
+
                         }
                     }
                 }
             }
-            service.GetDatasFromConfs(SlugName,"2020-03-01T00:00:00Z",
-                calendarDate).enqueue(confCallback)
+            service.GetDatasFrom(SlugName,"confirmed", "2020-03-01T00:00:00Z",
+                calendarDate).enqueue(calCallback)
 
-            service.GetDatasFromDeaths(SlugName,"2020-03-01T00:00:00Z",
-                calendarDate).enqueue(deathsCallback)
+            service.GetDatasFrom(SlugName,"deaths", "2020-03-01T00:00:00Z",
+                calendarDate).enqueue(calCallback)
 
-            service.GetDatasFromRecov(SlugName,"2020-03-01T00:00:00Z",
-                calendarDate).enqueue(recovCallback)
+            service.GetDatasFrom(SlugName,"recovered", "2020-03-01T00:00:00Z",
+                calendarDate).enqueue(calCallback)
         }
     }
 }

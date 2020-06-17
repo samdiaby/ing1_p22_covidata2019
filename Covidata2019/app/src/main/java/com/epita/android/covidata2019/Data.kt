@@ -24,20 +24,10 @@ class Data : AppCompatActivity() {
         setContentView(R.layout.activity_data)
         // A List to store or objects
 
-        // The base URL where the WebService is located
-        val baseURL = "https://api.covid19api.com/"
-        // Use GSON library to create our JSON parser
-        val jsonConverter = GsonConverterFactory.create(GsonBuilder().create())
-        // Create a Retrofit client object targeting the provided URL
-        // and add a JSON converter (because we are expecting json responses)
-        val retrofit = Retrofit.Builder()
-            .baseUrl(baseURL)
-            .addConverterFactory(jsonConverter)
-            .build()
-        // Use the client to create a service:
-        // an object implementing the interface to the WebService
+        // we use an single instance of retrofit located in the RetrofitInstance class
+        val service: WebServiceInterface = RetrofitInstance().getRetrofitInstance()
+            .create(WebServiceInterface::class.java)
 
-        val service: WebServiceInterface = retrofit.create(WebServiceInterface::class.java)
         val wsCallback: Callback<List<Countries>> = object : Callback<List<Countries>> {
             override fun onFailure(call: Call<List<Countries>>, t: Throwable) {
                 // Code here what happens if calling the WebService fails
