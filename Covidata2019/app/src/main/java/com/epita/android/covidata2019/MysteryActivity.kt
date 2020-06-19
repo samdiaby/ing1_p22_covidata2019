@@ -10,9 +10,5 @@ class MysteryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mystery)
-
-        //HSV.postDelayed( {HSV.fullScroll(HorizontalScrollView.FOCUS_RIGHT)},10000L)
-        HSV.post { HSV.smoothScrollTo(0,HSV.right)}
-
     }
 }

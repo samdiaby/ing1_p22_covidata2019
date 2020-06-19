@@ -12,7 +12,7 @@
     <string name="DataBtn">Data</string>
     <string name="GraphBtn">Graph</string>
     <string name="MysteryBtn">Barrier gestures</string>
-    <string name="MadebyEpita">Made by Epita</string>
+    <string name="MadebyEpita">Made at Epita</string>
 
     <!-- Data activity -->
     <string name="Totals">Totals</string>
