@@ -13,5 +13,5 @@
 
     <!-- Background -->
     <color name="BackgroundDark">#6d6d6d</color>
-    <color name="BackgroundLight">#c7c7c7</color>
+    <color name="BackgroundLight">#FFFFFF</color>
 </resources>

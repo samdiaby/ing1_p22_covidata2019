@@ -11,7 +11,7 @@
 
     <string name="DataBtn">Data</string>
     <string name="GraphBtn">Graph</string>
-    <string name="MysteryBtn">\?</string>
+    <string name="MysteryBtn">Barrier gestures</string>
     <string name="MadebyEpita">Made by Epita</string>
 
     <!-- Data activity -->
@@ -37,5 +37,10 @@
     <string name="activity_graph_data_confirmed_count">No data yet</string>
     <string name="activity_graph_data_deaths_count">No data yet</string>
     <string name="activity_graph_data_recovered_count">No data yet</string>
+
+    <string name="bras">Toussez ou éternuez dans son coude ou dans un mouchoir</string>
+    <string name="lavez">Se laver très régulierement les mains</string>
+    <string name="mouchoir">Utiliser un mouchoir à usage unique et le jeter</string>
+    <string name="serez">Saluer sans se serrer la main, éviter les embrassades</string>
 
 </resources>

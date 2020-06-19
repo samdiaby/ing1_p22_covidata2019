@@ -17,4 +17,9 @@
         <item name="android:windowBackground">@color/BackgroundDark</item>
     </style>
 
+    <!-- background data -->
+    <style name="AppTheme.mystery">
+        <item name="android:windowBackground">@color/BackgroundLight</item>
+    </style>
+
 </resources>

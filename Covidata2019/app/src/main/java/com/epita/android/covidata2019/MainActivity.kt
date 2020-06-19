@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val buttonData : Button = findViewById(R.id.data)
         val buttonGraph : Button = findViewById(R.id.Graph)
+        val buttonMystery : Button = findViewById(R.id.Mystery)
 
         // open the data layout
         buttonData.setOnClickListener{
@@ -24,6 +25,12 @@ class MainActivity : AppCompatActivity() {
         // open the graph layout
         buttonGraph.setOnClickListener{
             val intent = Intent(this, com.epita.android.covidata2019.Graph::class.java)
+            startActivity(intent);
+        }
+
+        // open the graph layout
+        buttonMystery.setOnClickListener{
+            val intent = Intent(this, com.epita.android.covidata2019.MysteryActivity::class.java)
             startActivity(intent);
         }
     }
