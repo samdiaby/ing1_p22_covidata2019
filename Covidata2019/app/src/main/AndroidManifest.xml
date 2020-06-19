@@ -10,10 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Graph"></activity>
-        <activity android:name=".Data"></activity>
-        <activity android:name=".CountryData"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".Graph" android:theme="@style/AppTheme.data"></activity>
+        <activity android:name=".Data" android:theme="@style/AppTheme.data"></activity>
+        <activity android:name=".CountryData" android:theme="@style/AppTheme.data"></activity>
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme.main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
